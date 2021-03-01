@@ -2,6 +2,8 @@
 
 Running Instructions:
 
+Pre-Requisite: Build the redux Application on local.
+
 npm i
 
 
