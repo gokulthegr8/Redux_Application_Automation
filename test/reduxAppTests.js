@@ -155,8 +155,14 @@ describe('Redux App Tests', () => {
             await page.waitFor(2000)
             count=await page.$eval(or.common.notificationsTabCount, node => node.innerText)
             expect(count).equals('6')
-
-
+        })
+        it('Validate Unread Notifications changing to read', async() => {
+            await page.click(or.notifications.refreshNotification)
+            await page.waitForSelector(or.common.notificationsTabCount)
+            var count=await page.$eval(or.common.notificationsTabCount, node => node.innerText)
+            expect(count).equals('1')
+            await page.click(or.common.notificationsTab)
+            expect(await page.$(or.common.notificationsTabCount)==null).to.be.ok
         })
     })  
 })
