@@ -4,6 +4,7 @@ module.exports = {
         postsTab:'div[class="navLinks"]>a[href="/"]',
         usersTab:'div[class="navLinks"]>a[href="/users"]',
         notificationsTab:'div[class="navLinks"]>a[href="/notifications"]',
+        notificationsTabCount:'div[class="navLinks"]>a[href="/notifications"]>span',
         labelHeading:'div[class="App"]>section:nth-child($)>h2'
     },
 

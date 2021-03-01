@@ -1,7 +1,8 @@
 const playwright = require('playwright')
 const chai = require('chai')
 const expect = chai.expect
-const BASE_URL = 'http://localhost:3000/'
+const BASE_URL = 'http://localhost:3000/'// For this assignment, kindly change the url with respect to the application build - local, production-ready, production
+//In real-world scenario, we will use a .env file to select the environement with the help of dotenv node library.
 const or=require('../test/objectRepository')
 const reduxApp=require('./ReferFiles/reduxApp')
 
@@ -144,6 +145,18 @@ describe('Redux App Tests', () => {
             var notificationTime=or.notifications.notificationTime.replace("$","2")
             var time=await page.$eval(notificationTime, node => node.innerText)
             expect(time).equals('14 minutes ago')
+        })
+        it('Validate Unread Notifications', async() => {
+            await page.click(or.notifications.refreshNotification)
+            await page.waitForSelector(or.common.notificationsTabCount)
+            var count=await page.$eval(or.common.notificationsTabCount, node => node.innerText)
+            expect(count).equals('1')
+            await page.click(or.notifications.refreshNotification)
+            await page.waitFor(2000)
+            count=await page.$eval(or.common.notificationsTabCount, node => node.innerText)
+            expect(count).equals('6')
+
+
         })
     })  
 })
